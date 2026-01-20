@@ -1,0 +1,99 @@
+name: Deploy Librería César a VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Descargar código del repositorio
+        uses: actions/checkout@v3
+      
+      - name: 🚀 Desplegar archivos por SFTP
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          timeout: 120s
+          command_timeout: 10m
+          source: "."
+          target: "/var/www/libreriacesar"
+          strip_components: 0
+          rm: false
+          overwrite: true
+          # Excluir archivos innecesarios
+          exclude: ".git,.github,node_modules,vendor,.env,.env.example,storage/logs/*,storage/framework/cache/*,storage/framework/sessions/*,storage/framework/views/*"
+      
+      - name: ⚙️ Instalar dependencias y configurar Laravel
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          timeout: 120s
+          command_timeout: 15m
+          script: |
+            cd /var/www/libreriacesar
+            
+            # Backup del .env si existe (para no sobrescribirlo)
+            if [ -f .env ]; then
+              cp .env .env.backup
+            else
+              cp .env.example .env
+              php artisan key:generate
+            fi
+            
+            # Instalar dependencias de Composer
+            composer install --no-dev --optimize-autoloader --no-interaction
+            
+            # Instalar dependencias de NPM y compilar assets
+            npm install
+            npm run build
+            
+            # Restaurar .env si hicimos backup
+            if [ -f .env.backup ]; then
+              mv .env.backup .env
+            fi
+            
+            # Crear carpetas necesarias si no existen
+            mkdir -p storage/framework/{sessions,views,cache}
+            mkdir -p storage/logs
+            mkdir -p bootstrap/cache
+            
+            # Permisos críticos para Laravel
+            chown -R www-data:www-data /var/www/libreriacesar
+            chmod -R 755 /var/www/libreriacesar
+            chmod -R 775 storage bootstrap/cache
+            
+            # Crear enlace simbólico de storage si no existe
+            if [ ! -L public/storage ]; then
+              php artisan storage:link
+            fi
+            
+            # Ejecutar migraciones (con --force para producción)
+            php artisan migrate --force
+            
+            # Limpiar y cachear configuraciones
+            php artisan config:clear
+            php artisan cache:clear
+            php artisan view:clear
+            php artisan route:clear
+            
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            
+            # Reiniciar PHP-FPM para aplicar cambios
+            sudo systemctl reload php8.3-fpm
+            
+            # Reiniciar Nginx
+            sudo systemctl reload nginx
+            
+            echo "✅ Deploy completado exitosamente"
