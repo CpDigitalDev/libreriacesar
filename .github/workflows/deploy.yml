@@ -40,7 +40,7 @@ jobs:
           timeout: 120s
           command_timeout: 15m
           script: |
-            cd /var/www/libreriacesar
+            cd /var/www/html/libreriacesar
             
             # Backup del .env si existe (para no sobrescribirlo)
             if [ -f .env ]; then
@@ -68,8 +68,8 @@ jobs:
             mkdir -p bootstrap/cache
             
             # Permisos críticos para Laravel
-            chown -R www-data:www-data /var/www/libreriacesar
-            chmod -R 755 /var/www/libreriacesar
+            chown -R www-data:www-data /var/www/html/libreriacesar
+            chmod -R 755 /var/www/html/libreriacesar
             chmod -R 775 storage bootstrap/cache
             
             # Crear enlace simbólico de storage si no existe
