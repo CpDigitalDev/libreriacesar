@@ -23,7 +23,7 @@ jobs:
           timeout: 120s
           command_timeout: 10m
           source: "."
-          target: "/var/www/libreriacesar"
+          target: "/var/www/html/libreriacesar"
           strip_components: 0
           rm: false
           overwrite: true
