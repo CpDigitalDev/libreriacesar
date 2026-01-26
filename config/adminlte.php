@@ -299,100 +299,221 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
-        [
-            'type' => 'navbar-search',
-            'text' => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type' => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
+    // Navbar items:
+    [
+        'type'         => 'navbar-search',
+        'text'         => 'Buscar libros...',
+        'topnav_right' => true,
+    ],
+    [
+        'type'         => 'fullscreen-widget',
+        'topnav_right' => true,
+    ],
 
-        // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
-        [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
+    // Sidebar items:
+    [
+        'type' => 'sidebar-menu-search',
+        'text' => 'Buscar',
+    ],
+    
+    ['header' => 'NAVEGACIÓN PRINCIPAL'],
+    
+    [
+        'text'        => 'Dashboard',
+        'url'         => 'home',
+        'icon'        => 'fas fa-fw fa-tachometer-alt',
+        'icon_color'  => 'primary',
+    ],
+    
+    [
+        'text'        => 'Explorar Catálogo',
+        'url'         => 'catalog',
+        'icon'        => 'fas fa-fw fa-book-open',
+        'icon_color'  => 'success',
+    ],
+    
+    [
+        'text'        => 'Mi Biblioteca',
+        'url'         => 'my-library',
+        'icon'        => 'fas fa-fw fa-books',
+        'icon_color'  => 'info',
+        'label'       => 5,
+        'label_color' => 'success',
+    ],
+
+    ['header' => 'COMPRAS Y PEDIDOS'],
+    
+    [
+        'text'        => 'Carrito de Compras',
+        'url'         => 'cart',
+        'icon'        => 'fas fa-fw fa-shopping-cart',
+        'icon_color'  => 'warning',
+        'label'       => 3,
+        'label_color' => 'danger',
+    ],
+    
+    [
+        'text'        => 'Mis Pedidos',
+        'url'         => 'orders',
+        'icon'        => 'fas fa-fw fa-box',
+        'icon_color'  => 'purple',
+    ],
+    
+    [
+        'text'        => 'Lista de Deseos',
+        'url'         => 'wishlist',
+        'icon'        => 'fas fa-fw fa-heart',
+        'icon_color'  => 'danger',
+    ],
+
+    ['header' => 'CATEGORÍAS'],
+    
+    [
+        'text'        => 'Fe y Espiritualidad',
+        'url'         => 'category/fe',
+        'icon'        => 'fas fa-fw fa-hands-praying',
+        'icon_color'  => 'navy',
+    ],
+    
+    [
+        'text'        => 'Superación Personal',
+        'url'         => 'category/superacion',
+        'icon'        => 'fas fa-fw fa-seedling',
+        'icon_color'  => 'teal',
+    ],
+    
+    [
+        'text'        => 'Familia y Relaciones',
+        'url'         => 'category/familia',
+        'icon'        => 'fas fa-fw fa-house-heart',
+        'icon_color'  => 'pink',
+    ],
+    
+    [
+        'text'        => 'Liderazgo Cristiano',
+        'url'         => 'category/liderazgo',
+        'icon'        => 'fas fa-fw fa-users-gear',
+        'icon_color'  => 'indigo',
+    ],
+
+    ['header' => 'MI CUENTA'],
+    
+    [
+        'text'        => 'Mi Perfil',
+        'url'         => 'profile',
+        'icon'        => 'fas fa-fw fa-user-circle',
+        'icon_color'  => 'gray',
+    ],
+    
+    [
+        'text'        => 'Suscripciones',
+        'url'         => 'subscriptions',
+        'icon'        => 'fas fa-fw fa-crown',
+        'icon_color'  => 'yellow',
+    ],
+    
+    [
+        'text'        => 'Configuración',
+        'url'         => 'settings',
+        'icon'        => 'fas fa-fw fa-cog',
+    ],
+
+    ['header' => 'SOPORTE'],
+    
+    [
+        'text'        => 'Centro de Ayuda',
+        'url'         => 'help',
+        'icon'        => 'fas fa-fw fa-question-circle',
+    ],
+    
+    [
+        'text'        => 'Contactar Soporte',
+        'url'         => 'support',
+        'icon'        => 'fas fa-fw fa-headset',
+    ],
+
+    // SOLO PARA ADMINS
+    ['header' => 'ADMINISTRACIÓN', 'can' => 'books.create'], // Cambiado
+
+    
+    [
+        'text'        => 'Gestión de Libros',
+        'icon'        => 'fas fa-fw fa-book-bookmark',
+        'icon_color'  => 'red',
+        'can'         => 'admin-access',
+        'submenu'     => [
+            [
+                'text' => 'Todos los Libros',
+                'url'  => 'admin/books',
+                'icon' => 'fas fa-fw fa-list',
+            ],
+            [
+                'text' => 'Agregar Nuevo',
+                'url'  => 'admin/books/create',
+                'icon' => 'fas fa-fw fa-plus-circle',
+            ],
+            [
+                'text' => 'Categorías',
+                'url'  => 'admin/categories',
+                'icon' => 'fas fa-fw fa-tags',
+            ],
+            [
+                'text' => 'Autores',
+                'url'  => 'admin/authors',
+                'icon' => 'fas fa-fw fa-pen-fancy',
             ],
         ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
+    ],
+    
+    [
+        'text'        => 'Pedidos',
+        'url'         => 'admin/orders',
+        'icon'        => 'fas fa-fw fa-shopping-bag',
+        'icon_color'  => 'orange',
+        'can'         => 'admin-access',
+        'label'       => 12,
+        'label_color' => 'warning',
+    ],
+    
+    [
+        'text'        => 'Usuarios',
+        'url'         => 'admin/users',
+        'icon'        => 'fas fa-fw fa-users',
+        'icon_color'  => 'cyan',
+        'can'         => 'admin-access',
+    ],
+    
+    [
+        'text'        => 'Reportes',
+        'icon'        => 'fas fa-fw fa-chart-line',
+        'icon_color'  => 'lime',
+        'can'         => 'admin-access',
+        'submenu'     => [
+            [
+                'text' => 'Ventas',
+                'url'  => 'admin/reports/sales',
+                'icon' => 'fas fa-fw fa-dollar-sign',
+            ],
+            [
+                'text' => 'Más Vendidos',
+                'url'  => 'admin/reports/bestsellers',
+                'icon' => 'fas fa-fw fa-fire',
+            ],
+            [
+                'text' => 'Usuarios Activos',
+                'url'  => 'admin/reports/users',
+                'icon' => 'fas fa-fw fa-user-check',
+            ],
         ],
     ],
+    
+    [
+        'text'        => 'Configuración del Sitio',
+        'url'         => 'admin/site-settings',
+        'icon'        => 'fas fa-fw fa-sliders-h',
+        'can'         => 'admin-access',
+    ],
+],
 
     /*
     |--------------------------------------------------------------------------
